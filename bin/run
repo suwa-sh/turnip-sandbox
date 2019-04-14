@@ -1,0 +1,21 @@
+#!/bin/bash
+dir_script="$(dirname $0)"
+cd "$(cd ${dir_script}/.. && pwd)" || exit 1
+
+# modules
+chromedriver_home="modules/chromedriver/linux"
+if [[ "$(uname)" = 'Darwin' ]]; then chromedriver_home="modules/chromedriver/mac"; fi
+export PATH="${PATH}:$(pwd)/${chromedriver_home}"
+
+# required
+if [[ "$(which rspec)x" == "x" ]]; then
+  echo "rspec is required." >&2
+  exit 1
+fi
+if [[ "$(which chromedriver)x" == "x" ]]; then
+  echo "chromedriver is required." >&2
+  exit 1
+fi
+
+# featuresを一括実行
+rspec spec/features
