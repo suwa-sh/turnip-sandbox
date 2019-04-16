@@ -2,6 +2,9 @@
 dir_script="$(dirname $0)"
 cd "$(cd ${dir_script}/.. && pwd)" || exit 1
 
+dir_features="spec/features"
+
+
 # modules
 chromedriver_home="modules/chromedriver/linux"
 if [[ "$(uname)" = 'Darwin' ]]; then chromedriver_home="modules/chromedriver/mac"; fi
@@ -17,5 +20,14 @@ if [[ "$(which chromedriver)x" == "x" ]]; then
   exit 1
 fi
 
-# featuresを一括実行
-rspec spec/features
+# list
+(
+  echo "features"
+  find ${dir_features} -mindepth 1 -maxdepth 1 -type f
+  echo ""
+) >&2
+
+# run
+echo "rspec ${dir_features}" >&2
+export chromedriver_path="$(which chromedriver)"
+rspec ${dir_features}

@@ -1,1 +1,7 @@
-spec/tmp/
+*.gem
+.bundle/
+*.lock
+gemfiles/*.lock
+/vendor/bundle
+
+tmp/

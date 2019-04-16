@@ -6,19 +6,19 @@ end
 
 step '検索画面を表示する' do
   visit '/'
-  page.save_screenshot 'spec/tmp/screenshots/login/page.png'
+  page.save_screenshot 'tmp/screenshots/login/page.png'
 end
 
 step "画面に :value が表示されていること" do |value|
   expect(page).to have_content (value)
-  page.save_screenshot 'spec/tmp/screenshots/google/check_' + value + '.png'
+  page.save_screenshot 'tmp/screenshots/google/check_' + value + '.png'
 end
 
 step "フォームに :keyword を入力する" do |keyword|
   fill_in 'q', with: keyword
   # forcus outさせる
   page.first('#hplogo').click
-  page.save_screenshot 'spec/tmp/screenshots/google/input_' + keyword + '.png'
+  page.save_screenshot 'tmp/screenshots/google/input_' + keyword + '.png'
 end
 
 step '検索ボタンをクリックする' do

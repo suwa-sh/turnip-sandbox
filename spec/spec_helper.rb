@@ -12,6 +12,7 @@ Capybara.run_server = false
 
 # Chrome
 Capybara.register_driver :selenium do |app|
+  Selenium::WebDriver::Chrome.driver_path = ENV['chromedriver_path']
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('headless')
   options.add_argument('--disable-gpu')
